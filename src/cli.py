@@ -8,7 +8,10 @@ Work wants an inventory app that:
             cond
             ?checkedIn?
 """
-items = [1, 2, 3]
+
+from models.item import Item
+
+items = []
 next_id = 0
 
 # TODO Make a menu print out showing options
@@ -25,16 +28,20 @@ def menu():
 def list_items():
     for item in items:
         print(item)
-    print("in list_item function")
   
 # Add New Item
 def new_item():
-    global next_id
+    global next_id 
+    global items
+
     name = input("Name: ")
     cond = input("Condition: ")
     item_id = next_id
     next_id += 1
 
+    tmp = Item(item_id, name, cond)
+    items.append(tmp)
+    
 
 # Update Existing Item
 def update_existing(itemId):
@@ -46,22 +53,26 @@ def delete_item(itemId):
 
 
 # Make the menu questions that grab the data
-while True:
-    menu()
-    choice = input("> ")
+def main():
+    while True:
+        menu()
+        choice = input("> ")
 
-    if choice == "1": # list items
-        list_items()
-    elif choice == "2": # add items
-        new_item()
-    elif choice == "3": # update items
-        pass
-    elif choice == "4": # delete items
-        pass
-    elif choice == "5": # exit
-        exit()
-    else:
-        input("Invalid input, give a number\n(Press Enter to try again)")
+        if choice == "1": # list items
+            list_items()
+        elif choice == "2": # add items
+            new_item()
+        elif choice == "3": # update items
+            pass
+        elif choice == "4": # delete items
+            pass
+        elif choice == "5": # exit
+            exit()
+        else:
+            input("Invalid input, give a number\n(Press Enter to try again)")
+
+if __name__ == "__main__":
+    main()
 
 
 
